@@ -26,10 +26,10 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<b>Venue Booking List</b>
+						<b>Event Audience List</b>
 						<span class="">
 
-							<button class="btn btn-primary btn-block btn-sm col-sm-2 float-right" type="button" id="new_book">
+							<button class="btn btn-primary btn-block btn-sm col-sm-2 float-right" type="button" id="new_register">
 					<i class="fa fa-plus"></i> New</button>
 				</span>
 					</div>
@@ -39,8 +39,8 @@
 							<thead>
 								<tr>
 									<th class="text-center">#</th>
-									<th class="">Booking Information</th>
-									<th class="">Customer Information</th>
+									<th class="">Event Information</th>
+									<th class="">Audience Information</th>
 									<th class="">Status</th>
 									<th class="text-center">Action</th>
 								</tr>
@@ -48,23 +48,25 @@
 							<tbody>
 								<?php 
 								$i = 1;
-								$booking = $conn->query("SELECT b.*,v.venue from venue_booking b inner join venue v on v.id = b.venue_id");
-								while($row=$booking->fetch_assoc()):
+								$registering = $conn->query("SELECT a.*,e.event,e.payment_type,e.type,e.amount,e.schedule from audience a inner join events e on e.id = a.event_id");
+								while($row=$registering->fetch_assoc()):
 									
 								?>
 								<tr>
 									
 									<td class="text-center"><?php echo $i++ ?></td>
 									<td class="">
-										 <p>Venue: <b><?php echo ucwords($row['venue']) ?></b></p>
-										 <p><small>Schedule: <b><?php echo date("M d,Y h:i A",strtotime($row['datetime'])) ?></b></small></p>
-										 <p><small>Duration: <?php echo ucwords($row['duration']) ?></small></p>
+										 <p>Event: <b><?php echo ucwords($row['event']) ?></b></p>
+										 <p><small>Schedule: <b><?php echo date("M d,Y h:i A",strtotime($row['schedule'])) ?></b></small></p>
+										 <p><small>Type: <b><?php echo $row['type']  == 1 ? "Public Event" : "Private Event" ?></small></b></p>
+										 <p><small>Fee: <b><?php echo $row['payment_type']  == 1 ? "Free" : number_format($row['amount'],2) ?></small></b></p>
 									</td>
 									<td class="">
-										 <p>Booked by: <b><?php echo  ucwords($row['name']) ?></b></p>
+										 <p>Name: <b><?php echo  ucwords($row['name']) ?></b></p>
 										 <p><small>Email: <b><?php echo  ucwords($row['email']) ?></b></small></p>
 										 <p><small>Contact: <b><?php echo  ucwords($row['contact']) ?></b></small></p>
 										 <p><small>Address: <b><?php echo  ucwords($row['address']) ?></b></small></p>
+										 <p><small>Payment Status: <b><?php echo $row['payment_type']  == 1 ? "N/A" : ($row['payment_status'] == 1 ? "Paid" : "Unpaid") ?></small></b></p>
 									</td>
 									<td class="text-center">
 										 <?php if($row['status'] == 0): ?>
@@ -76,9 +78,9 @@
 										 <?php endif; ?>
 									</td>
 									<td class="text-center">
-										<button class="btn btn-sm btn-outline-primary edit_book" type="button" data-id="<?php echo $row['id'] ?>" >Edit</button>
+										<button class="btn btn-sm btn-outline-primary edit_register" type="button" data-id="<?php echo $row['id'] ?>" >Edit</button>
 										<?php if(in_array($row['status'],array(0,2))): ?>
-										<button class="btn btn-sm btn-outline-danger delete_book" type="button" data-id="<?php echo $row['id'] ?>">Delete</button>
+										<button class="btn btn-sm btn-outline-danger delete_register" type="button" data-id="<?php echo $row['id'] ?>">Delete</button>
 										 <?php endif; ?>
 									</td>
 								</tr>
@@ -110,22 +112,22 @@
 	$(document).ready(function(){
 		$('table').dataTable()
 	})
-	$('#new_book').click(function(){
-		uni_modal("New Entry","manage_booking.php")
+	$('#new_register').click(function(){
+		uni_modal("New Entry","manage_register.php")
 	})
 	
-	$('.edit_book').click(function(){
-		uni_modal("Manage Book Details","manage_booking.php?id="+$(this).attr('data-id'))
+	$('.edit_register').click(function(){
+		uni_modal("Manage register Details","manage_register.php?id="+$(this).attr('data-id'))
 		
 	})
-	$('.delete_book').click(function(){
-		_conf("Are you sure to delete this Person?","delete_book",[$(this).attr('data-id')])
+	$('.delete_register').click(function(){
+		_conf("Are you sure to delete this Person?","delete_register",[$(this).attr('data-id')])
 	})
 
-	function delete_book($id){
+	function delete_register($id){
 		start_load()
 		$.ajax({
-			url:'ajax.php?action=delete_book',
+			url:'ajax.php?action=delete_register',
 			method:'POST',
 			data:{id:$id},
 			success:function(resp){

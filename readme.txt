@@ -1,32 +1,9 @@
-Free Download Source Code "Event_Management_System"
-
-FIRST Download
-
-1.XAMPP
-
-2."TEXT EDITOR" NOTEPAD++ OR SUBLIME TEXT 3 / ETC.
-
-3"Event_Management_System"
-
-4. Download the zip file/ download winrar
-
-5. Extract the file and copy "Event_Management_System" folder
-
-6.Paste inside root directory/ where you install xammp local disk C: drive D: drive E: paste: (for xampp/htdocs, 
-
-7. Open PHPMyAdmin (http://localhost/phpmyadmin)
-
-8. Create a database with name event_db
-
-6. Import event_db.sql file(given inside the zip package in SQL file folder)
-
-7.Run the script http://localhost/Event_Management_System
-
-
-**LOGIN DETAILS** 
-Admin
-user: admin
-pass: admin123
-
-****** https:1sourcecodr.blogspot.com ******
-Subcribe my You tube Channel **** 1 Source code ****
+Free Download Image Used Links
+-https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS6Owr1tFbnmw5JZrcL6EjevlZ7tZHyqYflcg&usqp=CAU
+-https://www.free-event.com/wp-content/uploads/2018/03/gibus-free-event-convention-corporate-copia.jpg
+-https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_537,q_50,w_1084/v1/clients/omaha/JSAV-multiscreen_3ddbdd40-38d9-4b64-9cf2-5d0ef356f29c.jpg
+-https://www.facecorporate.com/wp-content/uploads/2019/11/hero_4-991x700.jpg
+-https://slickaceltd.com/wp-content/uploads/2019/04/Austin-Wedding-Photographers-007.jpg
+-https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSjrWup9P7BnAI4-BosAovwFNd32UWZhaA-sQ&usqp=CAU
+-https://png.pngtree.com/thumb_back/fh260/background/20190220/ourmid/pngtree-purple-hd-business-banner-image_5493.jpg
+-

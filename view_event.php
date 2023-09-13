@@ -1,4 +1,4 @@
-<?php include 'admin/db_connect.php' ?>
+<?php include 'db_connect.php' ?>
 <?php
 if(isset($_GET['id'])){
 $qry = $conn->query("SELECT e.*,v.venue FROM events e inner join venue v on v.id=e.venue_id where e.id= ".$_GET['id']);
@@ -52,35 +52,24 @@ foreach($qry->fetch_array() as $k => $val){
 		max-height: 50vh;
 		cursor :pointer;
 	}
-	<?php if(!empty($banner)): ?>
-	 header.masthead {
-	    background: url(admin/assets/uploads/<?php echo $banner ?>);
-	    background-repeat: no-repeat;
-	    background-size: cover;
-	}
-	<?php endif; ?>
 </style>
-<header class="masthead">
-	<div class="container-fluid h-100">
-                <div class="row h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-4 align-self-end mb-4 pt-2 page-title">
-                    	<h4 class="text-center text-white"><b><?php echo ucwords($event) ?></b></h4>
-                        <hr class="divider my-4" />
-						<p class="text-center text-white"><small><b><i>Venue: <?php echo ucwords($venue) ?></small></i></b></p>
-                     
-                    </div>
-                    
-                </div>
-            </div>
-</header>
-<section></section>
-<div class="container">
+<div class="container-field">
 	<div class="col-lg-12">
-		<div class="card mt-4 mb-4">
+		<div class="card">
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-12">
-						
+						<div id="banner" class='mx-2'>
+							<?php if(!empty($banner)): ?>
+								<img src="assets/uploads/<?php echo($banner) ?>" alt="">
+							<?php endif; ?>
+						</div>
+					<br>
+					</div>
+					<div class="col-md-12">
+						<h4 class="text-center"><b><?php echo ucwords($event) ?></b></h4>
+						<p class="text-center"><small><b><i>Venue: <?php echo ucwords($venue) ?></small></i></b></p>
+						<hr class="divider" style="max-width:calc(100%)">
 					</div>
 					<div class="col-md-12" id="content">
 						
@@ -91,7 +80,7 @@ foreach($qry->fetch_array() as $k => $val){
 						<?php 
 					  		$images = array();
 					  		if(isset($id)){
-					  			$fpath = 'admin/assets/uploads/event_'.$id;
+					  			$fpath = 'assets/uploads/event_'.$id;
 					  			$images= scandir($fpath);
 					  		}
 					  		$i = 1;
@@ -132,14 +121,6 @@ foreach($qry->fetch_array() as $k => $val){
 					</p>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<hr class="divider" style="max-width: calc(100%);"/>
-						<div class="text-center">
-							<button class="btn btn-primary" id="register" type="button">Register</button>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -148,7 +129,5 @@ foreach($qry->fetch_array() as $k => $val){
 	$('#imagesCarousel img,#banner img').click(function(){
 		viewer_modal($(this).attr('src'))
 	})
-	 $('#register').click(function(){
-        uni_modal("Submit Registration Request","registration.php?event_id=<?php echo $id ?>")
-    })
+	$('.carousel').carousel()
 </script>
